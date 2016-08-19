@@ -60,6 +60,11 @@
     [self setupVideoList];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.player play];
+}
+
 - (void)setup {
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.75];
@@ -366,6 +371,7 @@
 }
 
 - (void)videoPlayerDidBeginPlay:(SSVideoPlayer *)videoPlayer {
+    [self stopIndicator];
     self.playButton.selected = NO;
 }
 
