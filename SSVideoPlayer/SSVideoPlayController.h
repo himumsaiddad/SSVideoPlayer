@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TrackedViewController.h"
 
 @interface SSVideoModel : NSObject
 
@@ -18,7 +19,7 @@
 @end
 
 
-@interface SSVideoPlayController : UIViewController
+@interface SSVideoPlayController : TrackedViewController
 
 - (instancetype)initWithVideoList:(NSArray <SSVideoModel *> *)videoList;
 
