@@ -8,23 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @class SSVideoPlayer;
 
 @protocol SSVideoPlayerDelegate <NSObject>
-
 @optional
-
 - (void)videoPlayerDidReadyPlay:(SSVideoPlayer *)videoPlayer;
-
 - (void)videoPlayerDidBeginPlay:(SSVideoPlayer *)videoPlayer;
-
 - (void)videoPlayerDidEndPlay:(SSVideoPlayer *)videoPlayer;
-
 - (void)videoPlayerDidSwitchPlay:(SSVideoPlayer *)videoPlayer;
-
 - (void)videoPlayerDidFailedPlay:(SSVideoPlayer *)videoPlayer;
-
 @end
 
 typedef NS_ENUM(NSInteger,SSVideoPlayerPlayState) {
@@ -54,6 +48,8 @@ typedef NS_ENUM(NSInteger,SSVideoPlayerDisplayMode) {
 @property (nonatomic,assign,readonly) float duration;
 
 @property (nonatomic,assign) SSVideoPlayerDisplayMode displayMode;
+
+@property CMTime currentPlayTime;
 
 - (void)playInContainer:(UIView *)container ;
 
