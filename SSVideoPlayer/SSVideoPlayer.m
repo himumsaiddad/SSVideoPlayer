@@ -30,6 +30,13 @@ static NSString *const SSVideoPlayerItemLoadedTimeRangesKeyPath = @"loadedTimeRa
         _player = [[AVPlayer alloc]init];
         _displayMode = SSVideoPlayerDisplayModeAspectFit;
         _pausePlayWhenMove = YES;
+        
+        
+        __weak __typeof__(self) weakSelf = self;
+        CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC); // 1 second
+        [_player addPeriodicTimeObserverForInterval:interval queue:NULL usingBlock:^(CMTime time) {
+            weakSelf.currentPlayTime = time;
+        }];
     }
     return self;
 }

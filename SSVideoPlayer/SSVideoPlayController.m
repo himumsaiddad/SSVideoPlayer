@@ -38,6 +38,7 @@
 @property (nonatomic,assign) BOOL videoListHidden;
 @property (nonatomic,assign) NSInteger playIndex;
 @property (nonatomic,strong) UIActivityIndicatorView *indicator;
+@property CMTime currentPlayTime;
 
 @end
 
@@ -48,6 +49,7 @@
     self = [super init];
     if (self) {
         self.videoPaths = [videoList mutableCopy];
+        self.currentPlayTime = kCMTimeZero;
     }
     return self;
 }
@@ -131,6 +133,13 @@
 
 - (void)quit:(UIBarButtonItem *)item {
     [self dismissViewControllerAnimated:NO completion:nil];
+
+    float pctPlayed = CMTimeGetSeconds(self.player.currentPlayTime) / self.player.duration;
+    pctPlayed = MAX(0, pctPlayed);
+    
+    if ([self.delegate respondsToSelector:@selector(videoPlayerController:didFinishWithPctPlayed:)]) {
+        [self.delegate videoPlayerController:self didFinishWithPctPlayed:pctPlayed * 100];
+    }
 }
 
 - (void)volumeChanged:(UISlider *)slider {
